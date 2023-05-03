@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  app:
+    image: nothingbutlucas/nestseekerbot:1.0 # Este es el nombre de la imagen, si la buildeaste vos, ponele el nombre que le pusiste si no, dejalo así
+    environment:
+      TOKEN: "TEKKEN" # Este es el token que te dio botfather
+      ROOM: "-4815162342" # Este es el id de tu grupo
+      LOGGING_LEVEL: INFO # Este es el nivel de log que va a tener el bot, yo recomiendo los primeros días dejarlo en INFO y luego de 1 o 2 semanas de que funcione bien se puede subir a ERROR
+      HORAS: 3 # Esto determina cada cuanto tiempo el bot va a ir a buscar las nuevas propiedades. 3 horas a mi me funciona bien, podes ponerle menos o más, anda fijandote de que los sitios no te bloqueen. En caso de que te bloqueen lo vas a ver en los logs como error.
+    command: ["python3", "-u", "main.py"] # Ejecución del bot
+    volumes: # Estos volumenes los hago para poder modificar las frases o sitios sin tener que entrar al contenedor. Y el seen.txt te sirve para que si lo apagas, lo vuelvas a prender y no te lleguen propiedades que ya te llegaron.
+      - /home/user/ruta/donde/tengas/el/repo/seen.txt:/app/seen.txt
+      - /home/user/ruta/donde/tengas/el/repo/frases.txt:/app/frases.txt
+      - /home/user/ruta/donde/tengas/el/repo/sitios.txt:/app/sitios.
+    # - SERVIDOR                                       :CONTENEDOR DE DOCKER
