@@ -4,7 +4,7 @@
 
 La idea de este bot es que te tire cada X tiempo los nuevos departamentos o casas que estés buscando.
 
-Para hacer esto estoy usando como base un bot de telegram que me encontré hace 3 años en una publicación que no pude volver a encontrar, asique los créditos van para alguna persona en internet que hizo un posteo.
+Para hacer esto estoy usando como base un bot de telegram que me encontré hace 3 años en una publicación que no pude volver a encontrar, asique los créditos van para alguna persona en internet que hizo un posteo. (?
 
 Este bot básicamente va a determinadas urls, extrae los anuncios, se fija si ya los miró antes y en caso de que no, te lo envía por telegram y luego marca como que la vió.
 Lo que hice fue volver a revivir este bot, haciendole un mínimo refactor porque tenía muchos oneliners y el código no tenía ningún comentario.
