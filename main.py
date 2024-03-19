@@ -10,15 +10,20 @@ import logging
 
 scraper = cloudscraper.create_scraper()
 
-TOKEN = os.environ.get('TOKEN', '')
-room = os.environ.get('ROOM', '')
-horas = os.environ.get('HORAS', 3)
-logging_level = os.environ.get('LOGGING_LEVEL', 'INFO')
+TOKEN = os.environ.get("TOKEN", "")
+room = os.environ.get("ROOM", "")
+horas = os.environ.get("HORAS", 3)
+logging_level = os.environ.get("LOGGING_LEVEL", "INFO")
 minutos = int(horas) * 60
 
-logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d/%m/%Y %I:%M:%S %p', level=logging.getLevelName(logging_level))
+logging.basicConfig(
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    datefmt="%d/%m/%Y %I:%M:%S %p",
+    level=logging.getLevelName(logging_level),
+)
 
 log = logging
+
 
 @dataclass
 class Parser:
@@ -34,7 +39,9 @@ class Parser:
         log.debug(ads)
 
         for ad in ads:
-            href_string = "href" # Usamos href porque los sitios suelen usar href, menos zonaprop
+            href_string = (
+                "href"  # Usamos href porque los sitios suelen usar href, menos zonaprop
+            )
             if self.website == "https://www.zonaprop.com.ar":
                 href_string = "data-to-posting"
             href = str(ad[href_string])
@@ -56,13 +63,20 @@ class Parser:
 # Cada pagina hace lo que quiere acá, asique probablemente esto haya que ir actualizandolo a medida que vayan implementando cambios
 
 parsers = [
-    Parser(website="https://www.argenprop.com",
-           link_regex="div.listing__items div.listing__item a"),
-    Parser(website="https://www.zonaprop.com.ar",
-           link_regex="div.postings-container div.sc-1tt2vbg-3 div.sc-i1odl-0"),
-    Parser(website="https://inmuebles.mercadolibre.com.ar",
-           link_regex="section.ui-search-results ol.ui-search-layout div.ui-search-item__group a")
+    Parser(
+        website="https://www.argenprop.com",
+        link_regex="div.listing__items div.listing__item a",
+    ),
+    Parser(
+        website="https://www.zonaprop.com.ar",
+        link_regex="div.postings-container div.sc-1tt2vbg-3 div.sc-i1odl-0",
+    ),
+    Parser(
+        website="https://inmuebles.mercadolibre.com.ar",
+        link_regex="section.ui-search-results ol.ui-search-layout div.ui-search-item__group a",
+    ),
 ]
+
 
 def main():
     """Ejecución main del bot"""
@@ -99,7 +113,10 @@ def main():
             logging.info("Durmiendo entre sitio y sitio")
             random_sleep(30)
         else:
-            logging.debug(f"No miramos '{url}', porque probablemente no sea un sitio. En caso de que lo sea, ponele el http:// o https://")
+            logging.debug(
+                f"No miramos '{url}', porque probablemente no sea un sitio. En caso de que lo sea, ponele el http:// o https://"
+            )
+
 
 def random_sleep(seconds):
     """Sleeps sort of a random time, but close to the seconds provided. This is to avoid the firewall blocking of the servers"""
@@ -110,11 +127,13 @@ def random_sleep(seconds):
 
 def read_txt(file_to_read):
     try:
-        with open(file_to_read, 'r') as file:
+        with open(file_to_read, "r") as file:
             lines = file.read().splitlines()
         return lines
     except FileNotFoundError:
-        logging.error(f"No se encontro el archivo {file_to_read}. Para solucionar este problema crea el archivo.")
+        logging.error(
+            f"No se encontro el archivo {file_to_read}. Para solucionar este problema crea el archivo."
+        )
         exit(1)
 
 
@@ -154,10 +173,10 @@ def mark_as_seen(unseens):
             format_unseen = f"{unseen['id']}\n"
             f.write(format_unseen)
 
+
 while __name__ == "__main__":
     main()
     logging.info(f"Esperando {minutos} minutos, osea {horas} horas")
     for x in range(1, minutos):
         random_sleep(60)
         logging.debug(f"Faltan {minutos -x} minutos")
-
