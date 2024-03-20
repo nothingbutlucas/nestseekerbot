@@ -1,7 +1,6 @@
-version: "3.9"
 services:
   app:
-    image: nothingbutlucas/nestseekerbot:1.0 # Este es el nombre de la imagen, si la buildeaste vos, ponele el nombre que le pusiste si no, dejalo así
+    image: nothingbutlucas/nestseekerbot:latest # Este es el nombre de la imagen, si la buildeaste vos, ponele el nombre que le pusiste si no, dejalo así
     environment:
       TOKEN: "TEKKEN" # Este es el token que te dio botfather
       ROOM: "-4815162342" # Este es el id de tu grupo
