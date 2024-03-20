@@ -68,7 +68,7 @@ cd nestseekerbot
 Este paso es opcional porque la imagen ya la *buildee* (Y se buildea con cada release) y subí a [dockerhub](https://hub.docker.com/r/nothingbutlucas/nestseekerbot)
 
 ~~~ bash
-docker build -t nestseekerbot:1.0 .
+docker build -t nestseekerbot:latest .
 ~~~
 
 #### Crear el docker-compose
@@ -79,7 +79,7 @@ Podes usar como base el que está en este repositorio:
 version: "3.9"
 services:
   app:
-    image: nothingbutlucas/nestseekerbot:1.0 # Este es el nombre de la imagen, si la buildeaste vos, ponele el nombre que le pusiste si no, dejalo así
+    image: nothingbutlucas/nestseekerbot:latest # Este es el nombre de la imagen, si la buildeaste vos, ponele el nombre que le pusiste si no, dejalo así
     environment:
       TOKEN: "TEKKEN" # Este es el token que te dió botfather
       ROOM: "-4815162342" # Este es el id de tu grupo o chatid
@@ -91,8 +91,7 @@ services:
       - /home/user/ruta/donde/tengas/el/repo/frases.txt:/app/frases.txt
       - /home/user/ruta/donde/tengas/el/repo/sitios.txt:/app/sitios.txt
       - /home/user/ruta/donde/tengas/el/repo/denylist.txt:/app/denylist.txt
-
-# - SERVIDOR                                       :CONTENEDOR DE DOCKER
+    # - SERVIDOR                                       :CONTENEDOR DE DOCKER
 ```
 
 #### Crear archivos de configuración (sitios.txt, frases.txt y seen.txt)
