@@ -177,10 +177,12 @@ def mark_as_seen(unseens):
 
 def skips_url(post):
     url = post["url"]
-    for word in read_txt("denylist.txt"):
-        if word in url:
-            logging.info("No miramos '{}'".format(url))
-            return True
+    # Verificar si denylist.txt existe
+    if os.path.exists("denylist.txt"):
+        for word in read_txt("denylist.txt"):
+            if word in url:
+                logging.info("No miramos '{}'".format(url))
+                return True
     return False
 
 
