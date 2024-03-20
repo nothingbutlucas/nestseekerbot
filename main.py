@@ -101,13 +101,14 @@ def main():
             logging.info("{} vistos, {} no vistos".format(len(seen), len(unseen)))
 
             for post in unseen:
-                api_calls += 1
-                if api_calls == 20:
-                    # Durmiendo para no saturar la api de telegram -> Limite de 20 mensajes en 1 minuto
-                    api_calls = 0
-                    logging.info("Durmiendo para no saturar la api de telegram")
-                    random_sleep(60)
-                notify(post)
+                if not skips_url(post):
+                    api_calls += 1
+                    if api_calls == 20:
+                        # Durmiendo para no saturar la api de telegram -> Limite de 20 mensajes en 1 minuto
+                        api_calls = 0
+                        logging.info("Durmiendo para no saturar la api de telegram")
+                        random_sleep(60)
+                    notify(post)
 
             mark_as_seen(unseen)
             logging.info("Durmiendo entre sitio y sitio")
@@ -172,6 +173,15 @@ def mark_as_seen(unseens):
         for unseen in unseens:
             format_unseen = f"{unseen['id']}\n"
             f.write(format_unseen)
+
+
+def skips_url(post):
+    url = post["url"]
+    for word in read_txt("denylist.txt"):
+        if word in url:
+            logging.info("No miramos '{}'".format(url))
+            return True
+    return False
 
 
 while __name__ == "__main__":

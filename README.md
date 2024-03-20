@@ -65,7 +65,7 @@ cd nestseekerbot
 
 #### Buildear la imagen (Opcional)
 
-Este paso es opcional porque la imagen ya la *buildee* y subí a [dockerhub](https://hub.docker.com/r/nothingbutlucas/nestseekerbot)
+Este paso es opcional porque la imagen ya la *buildee* (Y se buildea con cada release) y subí a [dockerhub](https://hub.docker.com/r/nothingbutlucas/nestseekerbot)
 
 ~~~ bash
 docker build -t nestseekerbot:1.0 .
@@ -89,8 +89,10 @@ services:
     volumes: # Estos volumenes los hago para poder modificar las frases o sitios sin tener que entrar al contenedor. Y el seen.txt te sirve para que si lo apagas, lo vuelvas a prender y no te lleguen propiedades que ya te llegaron.
       - /home/user/ruta/donde/tengas/el/repo/seen.txt:/app/seen.txt
       - /home/user/ruta/donde/tengas/el/repo/frases.txt:/app/frases.txt
-      - /home/user/ruta/donde/tengas/el/repo/sitios.txt:/app/sitios.
-    # - SERVIDOR                                       :CONTENEDOR DE DOCKER
+      - /home/user/ruta/donde/tengas/el/repo/sitios.txt:/app/sitios.txt
+      - /home/user/ruta/donde/tengas/el/repo/denylist.txt:/app/denylist.txt
+
+# - SERVIDOR                                       :CONTENEDOR DE DOCKER
 ```
 
 #### Crear archivos de configuración (sitios.txt, frases.txt y seen.txt)
@@ -106,6 +108,12 @@ Tene en cuenta que buscar casa es una mierda porque las fotos estan sacadas como
 No podes hacer nada para cambiar esto, pero lo que sí podes hacer, es armarte las url para que te traiga lo que necesites y unas frases que te saquen una sonrisa cada vez que te llegue una casa de mierda.
 
 Las url las metes en sitios.txt, una url por línea y las frases las metes en frases.txt, una frase por línea.
+
+El archivo denylist.txt puede estar vacio. Este archivo lo que hace es filtrar una url. El caso de uso es:
+
+Suponiendo que una url dice: https://sitio.deptos/departamento-monoambiente-24-metros
+
+Si en el archivo denylist tenes las palabras: departamento o monoambiente o 24 o metros, la url se va a filtrar y no se va a enviar a telegram
 
 El bot va iterando por cada línea y se trae los anuncios de esa página. Se fija en el archivo seen.txt si ya te lo mandó.
 Si lo tiene, sigue con el siguiente anuncio.
