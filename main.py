@@ -13,7 +13,7 @@ scraper = cloudscraper.create_scraper()
 TOKEN = os.environ.get("TOKEN", "")
 room = os.environ.get("ROOM", "")
 horas = os.environ.get("HORAS", 3)
-logging_level = os.environ.get("LOGGING_LEVEL", "INFO")
+logging_level = os.environ.get("LOGGING_LEVEL", "DEBUG")
 minutos = int(horas) * 60
 
 logging.basicConfig(
@@ -35,6 +35,8 @@ class Parser:
         soup = BeautifulSoup(contents, "html.parser")
         log.debug(soup)
         ads = soup.select(self.link_regex)
+        log.debug("=" * 50)
+        log.debug(ads)
         log.debug("=" * 50)
         log.debug(ads)
 
@@ -69,7 +71,7 @@ parsers = [
     ),
     Parser(
         website="https://www.zonaprop.com.ar",
-        link_regex="div.postings-container div.sc-1tt2vbg-3 div.sc-i1odl-0",
+        link_regex="div.postings-container div.sc-1tt2vbg-5 div.sc-i1odl-0",
     ),
     Parser(
         website="https://inmuebles.mercadolibre.com.ar",
