@@ -75,7 +75,7 @@ parsers = [
     ),
     Parser(
         website="https://inmuebles.mercadolibre.com.ar",
-        link_regex="section.ui-search-results ol.ui-search-layout div.ui-search-item__group a",
+        link_regex="div.ui-search-item__group__element a",
     ),
 ]
 
