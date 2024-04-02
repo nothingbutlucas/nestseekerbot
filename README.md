@@ -76,7 +76,6 @@ docker build -t nestseekerbot:latest .
 Podes usar como base el que está en este repositorio:
 
 ```yaml
-version: "3.9"
 services:
   app:
     image: nothingbutlucas/nestseekerbot:latest # Este es el nombre de la imagen, si la buildeaste vos, ponele el nombre que le pusiste si no, dejalo así
@@ -98,12 +97,15 @@ services:
 
 Podes usar como base los archivos de este repo.
 
-En el archivo sitios.txt tenes que poner las url de las páginas web junto con los filtros que quieras. Para hacer esto vas a la página web, le pones los filtros que necesites, te copias la url y la pones en el archivo sitios.txt. Como tip: podes irte a la página 2 y copiar también esa url. Vas a ver que te va a agregar un parametro de número de página. Ahí lo que podes hacer es poner 5 páginas para atrás por cada sitio como para tener los últimos sitios y no perderte ninguno.
+En el archivo sitios.txt tenes que poner las url de las páginas web junto con los filtros que quieras.
+Para hacer esto vas a la página web, le pones los filtros que necesites, te copias la url y la pones en el archivo sitios.txt.
+Como tip: podes irte a la página 2 y copiar también esa url.
+Vas a ver que te va a agregar un parametro de número de página.
+Ahí lo que podes hacer es poner 5 páginas para atrás por cada sitio como para tener los últimos sitios y no perderte ninguno.
+Es importante agregar también el orden por **más recientes**. Así te van a aparecer de los más nuevos a los más viejos y si aparece uno nuevo, el bot te lo va a mandar
 
 En el archivo frases.txt pones frases previas a la url.
-
 Tene en cuenta que buscar casa es una mierda porque las fotos estan sacadas como el culo, las casas suelen ser inhabitables y esta todo carísimo.
-
 No podes hacer nada para cambiar esto, pero lo que sí podes hacer, es armarte las url para que te traiga lo que necesites y unas frases que te saquen una sonrisa cada vez que te llegue una casa de mierda.
 
 Las url las metes en sitios.txt, una url por línea y las frases las metes en frases.txt, una frase por línea.
@@ -144,11 +146,23 @@ No mucho más, porque si empezas con los filtros de m2 o que tenga x cantidad de
 
 ## Errores y problemas conocidos
 
-Si ves que te manda las mismas casas repetidas, puede ser porque reiniciaste el bot y no le pasaste bien el volumen donde tenes el seen.txt en el docker-compose o porque la misma propiedad se publicó en distintos sitios web.
+### Repetición
+
+* Si ves que te manda las mismas casas repetidas, puede ser porque reiniciaste el bot y no le pasaste bien el volumen donde tenes el seen.txt en el docker-compose o porque la misma propiedad se publicó en distintos sitios web.
+
+### El bot no envía ninguna publicación de ningún sitio
 
 Un error que me encontré, es ponerle un tiempo muy bajo en la variable de HORAS y que los sitios me bloqueen los requests ó que al cabo de un tiempo me empiecen a devolver códigos 400, supongo que por alguna movida de firewall.
 
 Por ahora, lo que me funcionó fue meterle un random a los sleeps para que sean siempre distintos, pero no sé tampoco cuanto tiempo funcionara. La vez que me bloquearon, reinicié el server y volvió a funcionar. También aumenté el tiempo de la variable HORAS a 3. Fijate si tiene sentido porque si miras el celu 1 vez por día, de última ponelo que mire cada 12 hs o algo así.
+
+### El bot no envía ninguna publicación de zonaprop
+
+Bueno, zona prop es un tema aparte. Si miras el código, vas a ver que los divs en donde esta el post tiene un id rarisimo.
+Bueno, la onda es que ese id va cambiando con el tiempo. No se cuanto tiempo. Tampoco se porque cambia.
+Supongo que debe ser para justamente evitar bots, pero no lo se, tampoco lo investigue.
+Puede que haya una forma dinamica de obtener este id, pero no encontre una por el momento.
+La solución sería ir a la web, F12 y chusmear el id del div dentro de `div.postings-container` que contenga la url y eso:
 
 ## Mejoras
 
