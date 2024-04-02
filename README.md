@@ -164,6 +164,8 @@ Supongo que debe ser para justamente evitar bots, pero no lo se, tampoco lo inve
 Puede que haya una forma dinamica de obtener este id, pero no encontre una por el momento.
 La solución sería ir a la web, F12 y chusmear el id del div dentro de `div.postings-container` que contenga la url y eso:
 
+![Screenshot to identify the div's names](propprop.png)
+
 ## Mejoras
 
 Una mejora podría ser integrar este bot con [ptb](https://github.com/python-telegram-bot/python-telegram-bot) y poder configurar todo directamente desde el bot.
