@@ -71,7 +71,7 @@ parsers = [
     ),
     Parser(
         website="https://www.zonaprop.com.ar",
-        link_regex="div.postings-container div.sc-1tt2vbg-5 div.sc-i1odl-0",
+        link_regex="div.main-module__list-postings-container div.postingsList-module__card-container div.postingCardLayout-module__posting-card-layout",
     ),
     Parser(
         website="https://inmuebles.mercadolibre.com.ar",

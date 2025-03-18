@@ -158,13 +158,15 @@ Por ahora, lo que me funcionó fue meterle un random a los sleeps para que sean 
 
 ### El bot no envía ninguna publicación de zonaprop
 
-Bueno, zona prop es un tema aparte. Si miras el código, vas a ver que los divs en donde esta el post tiene un id rarisimo.
+~~Bueno, zona prop es un tema aparte. Si miras el código, vas a ver que los divs en donde esta el post tiene un id rarisimo.
 Bueno, la onda es que ese id va cambiando con el tiempo. No se cuanto tiempo. Tampoco se porque cambia.
 Supongo que debe ser para justamente evitar bots, pero no lo se, tampoco lo investigue.
 Puede que haya una forma dinamica de obtener este id, pero no encontre una por el momento.
-La solución sería ir a la web, F12 y chusmear el id del div dentro de `div.postings-container` que contenga la url y eso:
+La solución sería ir a la web, F12 y chusmear el id del div dentro de `div.postings-container` que contenga la url y eso:~~
 
 ![Screenshot to identify the div's names](propprop.png)
+
+*Update: parece que zonaprop se copo y ahora no hay ningún id loco en la clase, así que no debería haber problema. Al menos al momento de hacer este commit*
 
 ## Mejoras
 
