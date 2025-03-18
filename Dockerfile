@@ -1,6 +1,7 @@
 FROM --platform=linux/arm64/v8 python:3.9.21-bookworm
 
-RUN pip install --upgrade pip && mkdir /app
+RUN pip install --upgrade pip 
+RUN mkdir /app
 
 ADD requirements.txt /app
 ADD main.py /app
