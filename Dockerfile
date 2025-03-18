@@ -1,4 +1,4 @@
-FROM --platform linux/arm64/v8 python:3.9.21-bookworm
+FROM --platform=linux/arm64/v8 python:3.9.21-bookworm
 
 RUN pip install --upgrade pip && mkdir /app
 
